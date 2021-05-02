@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour
 	public float smoothness = 5;
 	void Start()
 	{
-		cam = GetComponent<Camera>();
+		cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		player = GameObject.FindWithTag("Player");
 		defaultOffset = cam.gameObject.transform.position - player.transform.position;
 	}

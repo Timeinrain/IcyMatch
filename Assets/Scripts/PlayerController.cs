@@ -11,17 +11,18 @@ public class PlayerController : MonoBehaviour
 	public float jumpForce = 5.0f;
 	public float speed = 2.0f;
 	Animator anim;
+	public float maxSpeed = 10;
 	void Start()
 	{
 		rb = GetComponent<Rigidbody2D>();
 		anim = GetComponent<Animator>();
+		StartCoroutine(OnGroundCheck());
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
 		Jump();
-		StartCoroutine(OnGroundCheck());
 	}
 
 	IEnumerator OnGroundCheck()
@@ -44,13 +45,11 @@ public class PlayerController : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		Gizmos.DrawLine(transform.position, transform.position + Vector3.down * 10f);
-
 	}
 
 	private void FixedUpdate()
 	{
-		var vx =
-		Input.GetAxisRaw("Horizontal");
+		var vx = Input.GetAxisRaw("Horizontal");
 		Move(vx);
 	}
 
@@ -69,7 +68,8 @@ public class PlayerController : MonoBehaviour
 			anim.SetFloat("MovingSpeed", 0);
 			return;
 		}
-		rb.velocity = new Vector2(vx * speed, rb.velocity.y);
+		if (Mathf.Abs(rb.velocity.x) < maxSpeed)
+			rb.AddForce(new Vector2(vx * speed * Time.deltaTime * 100, 0));
 		anim.SetFloat("MovingSpeed", vx);
 	}
 

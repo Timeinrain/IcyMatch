@@ -8,7 +8,7 @@ public class BackgroundFollow : MonoBehaviour
 	Vector3 offset;
 	void Start()
 	{
-		cam = FindObjectOfType<Camera>();
+		cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 		offset = transform.position - cam.transform.position;
 	}
 
