@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Camera Follow the main character.
+/// </summary>
 public class CameraFollow : MonoBehaviour
 {
 	Camera cam;
@@ -16,10 +19,8 @@ public class CameraFollow : MonoBehaviour
 		defaultOffset = cam.gameObject.transform.position - player.transform.position;
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		transform.position = Vector3.Lerp(transform.position, player.transform.position + defaultOffset, Time.deltaTime * smoothness);
-
 	}
 }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Dynamically move the background image.
+/// </summary>
 public class BackgroundFollow : MonoBehaviour
 {
 	Camera cam;
@@ -12,7 +15,6 @@ public class BackgroundFollow : MonoBehaviour
 		offset = transform.position - cam.transform.position;
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		transform.position = cam.transform.position + offset;
